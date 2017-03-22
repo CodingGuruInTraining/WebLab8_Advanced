@@ -13,27 +13,45 @@ router.get('/convert', function(req, res) {
     var convertTo = req.query.to_currency;
     var convertFrom = req.query.from_currency;
 
-    console.log(convertFrom, convertTo)
+    console.log(convertFrom, convertTo);
 
     getRatesFunction(function(err, rates) {
 
-      //todo check for error and handle
-      if (err) {
-         return next(err);
-      }
+        //todo check for error and handle
+        if (err) {
+            return next(err);
+        }
 
-      else {
+        else {
 
-        // math here.
-        //return res.send('convertTo ' + convertTo + " " + convertToCurrencyRelatedToUSD + " convertFrom " + convertFrom + " " + convertFromCurrencyRelatedToUSD);
-        return res.send(JSON.stringify(rates))
-        // todo put this back and render your template plus data.
-        //return res.render('results', { input : input, result: result, currencyTo: convertTo, currencyFrom: convertFrom})
 
-      }
-});
+            var input = req.query.dollar_amount;
+            var convertTo = req.query.to_currency;
+            var convertFrom = req.query.from_currency;
 
-  
+            var rateTo = rates[convertTo];
+            var rateFrom = rates[convertFrom];
+
+            console.log(rateTo + " " + rateFrom);
+
+
+            var toDollars = input/rateFrom;
+            var fromDollars = toDollars * rateTo;
+
+            var result = fromDollars;
+
+
+
+            // math here.
+            //return res.send('convertTo ' + convertTo + " " + convertToCurrencyRelatedToUSD + " convertFrom " + convertFrom + " " + convertFromCurrencyRelatedToUSD);
+            // return res.send(JSON.stringify(rates))
+            // todo put this back and render your template plus data.
+            return res.render('results', { input : input, result: result, currencyTo: convertTo, currencyFrom: convertFrom})
+
+        }
+    });
+
+
 });
 
 module.exports = router;
