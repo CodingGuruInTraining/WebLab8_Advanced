@@ -1,0 +1,7 @@
+body {
+    background: greenyellow;
+}
+
+input, button, select {
+    margin: 5px;
+}

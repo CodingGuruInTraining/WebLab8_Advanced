@@ -1,0 +1,11 @@
+{
+  "name": "currency2",
+  "version": "0.0.1",
+  "dependencies": {
+    "express": "^4.14.1",
+    "express-handlebars": "~3.0.0"
+  },
+  "description": "Simple currency converter, but with an API!",
+  "main": "app.js",
+  "author": "Not Mark"
+}
