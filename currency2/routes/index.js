@@ -18,6 +18,7 @@ router.get('/convert', function(req, res) {
     getRatesFunction(function(err, rates) {
 
         //todo check for error and handle
+
         if (err) {
             return next(err);
         }
@@ -25,13 +26,13 @@ router.get('/convert', function(req, res) {
         else {
 
 
-            var input = req.query.dollar_amount;
-            var convertTo = req.query.to_currency;
-            var convertFrom = req.query.from_currency;
+            // var input = req.query.dollar_amount;
+            // var convertTo = req.query.to_currency;
+            // var convertFrom = req.query.from_currency;
 
             var rateTo = rates[convertTo];
             var rateFrom = rates[convertFrom];
-
+//  what if variable = undefined (incorrect currency code)....
             console.log(rateTo + " " + rateFrom);
 
 
