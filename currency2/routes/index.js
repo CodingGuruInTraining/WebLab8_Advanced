@@ -1,8 +1,6 @@
 var express = require('express');
 var router = express.Router();
-//var rates = require('./rates.js');
-var request = require('request');
-
+var getRatesFunction = require('../helpers/rates.js');
 
 // var exchangeRates = { 'EUR' : 0.9458, 'JPY' : 113.938, 'EP' : 17.4983, 'INR' : 66.6376, 'CUP' : 26.5 };
 
@@ -17,11 +15,7 @@ router.get('/convert', function(req, res) {
 
     console.log(convertFrom, convertTo)
 
-    var baseURL = 'https://openexchangerates.org/api/latest.json';
-
-    var queryParam = { app_id : process.env.RATES_API_KEY };
-
-    request({ url : baseURL, qs : queryParam } , function(err, response, data){
+    getRatesFunction(function(err, rates) {
 
       //todo check for error and handle
       if (err) {
@@ -29,32 +23,17 @@ router.get('/convert', function(req, res) {
       }
 
       else {
-        var ratesJSON = JSON.parse(data);
-        console.log(ratesJSON);  // everything compared to USD
 
-        var convertToCurrencyRelatedToUSD =  ratesJSON.rates[convertTo];
-        var convertFromCurrencyRelatedToUSD =  ratesJSON.rates[convertFrom];
-
-        console.log(convertFromCurrencyRelatedToUSD);
-        console.log(convertToCurrencyRelatedToUSD);
-
-        // math
-
-        // not using the templates. res.send sends text.
-        return res.send('convertTo ' + convertTo + " " + convertToCurrencyRelatedToUSD + " convertFrom " + convertFrom + " " + convertFromCurrencyRelatedToUSD);
-
-        // todo put this back and render your template plus data. 
+        // math here.
+        //return res.send('convertTo ' + convertTo + " " + convertToCurrencyRelatedToUSD + " convertFrom " + convertFrom + " " + convertFromCurrencyRelatedToUSD);
+        return res.send(JSON.stringify(rates))
+        // todo put this back and render your template plus data.
         //return res.render('results', { input : input, result: result, currencyTo: convertTo, currencyFrom: convertFrom})
 
       }
+});
 
-    })
-
-
-
-    // var rateTo = exchangeRates[convertTo];
-    // var rateFrom = exchangeRates[convertFrom];
-
+  
 });
 
 module.exports = router;
