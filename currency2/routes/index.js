@@ -1,20 +1,25 @@
+// Imports express.
 var express = require('express');
+// Creates Router object.
 var router = express.Router();
+// Imports function from helper file.
 var getRatesFunction = require('../helpers/rates.js');
 
-// var exchangeRates = { 'EUR' : 0.9458, 'JPY' : 113.938, 'EP' : 17.4983, 'INR' : 66.6376, 'CUP' : 26.5 };
-
+// Server retrieves index view page.
 router.get('/', function(req, res){
     res.render('index');
 });
 
+// Server performs calculations based on inputs.
 router.get('/convert', function(req, res) {
+    // User's entered amount.
     var input = req.query.dollar_amount;
+    // TO and FROM currency selections.
     var convertTo = req.query.to_currency;
     var convertFrom = req.query.from_currency;
 
-    console.log(convertFrom, convertTo);
-
+    // Runs imported function and uses then uses the
+    // returned results for calculations.
     getRatesFunction(function(err, rates) {
 
         //todo check for error and handle
@@ -24,35 +29,22 @@ router.get('/convert', function(req, res) {
         }
 
         else {
-
-
-            // var input = req.query.dollar_amount;
-            // var convertTo = req.query.to_currency;
-            // var convertFrom = req.query.from_currency;
-
+            // Gets matching currency codes from returned JSON object.
             var rateTo = rates[convertTo];
             var rateFrom = rates[convertFrom];
 //  what if variable = undefined (incorrect currency code)....
             console.log(rateTo + " " + rateFrom);
 
-
+            // Converts the User's input to USD first and then to the
+            // selected currency.
             var toDollars = input/rateFrom;
-            var fromDollars = toDollars * rateTo;
+            var result = toDollars * rateTo;
 
-            var result = fromDollars;
-
-
-
-            // math here.
-            //return res.send('convertTo ' + convertTo + " " + convertToCurrencyRelatedToUSD + " convertFrom " + convertFrom + " " + convertFromCurrencyRelatedToUSD);
-            // return res.send(JSON.stringify(rates))
-            // todo put this back and render your template plus data.
+            // Renders template page with variables.
             return res.render('results', { input : input, result: result, currencyTo: convertTo, currencyFrom: convertFrom})
-
         }
     });
-
-
 });
 
+// Exports Router object to run.
 module.exports = router;
