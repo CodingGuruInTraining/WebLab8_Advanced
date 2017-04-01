@@ -2,10 +2,10 @@
   "name": "currency2",
   "version": "0.0.1",
   "dependencies": {
-    "express": "^4.14.1",
+    "express": "^4.15.0",
     "express-handlebars": "~3.0.0",
-    "moment": "^2.17.1",
-    "morgan": "~1.7.0",
+    "moment": "^2.18.1",
+    "morgan": "^1.7.0",
     "request": "^2.79.0"
   },
   "description": "Simple currency converter, but with an API!",
