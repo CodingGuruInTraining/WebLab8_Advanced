@@ -20,7 +20,7 @@ router.get('/convert', function(req, res) {
 
     // Runs imported function and uses then uses the
     // returned results for calculations.
-    getRatesFunction(function(err, rates) {
+    getRatesFunction(function(err, jsonrates) {
 
         //todo check for error and handle
 
@@ -30,8 +30,8 @@ router.get('/convert', function(req, res) {
 
         else {
             // Gets matching currency codes from returned JSON object.
-            var rateTo = rates[convertTo];
-            var rateFrom = rates[convertFrom];
+            var rateTo = jsonrates[convertTo];
+            var rateFrom = jsonrates[convertFrom];
 //  what if variable = undefined (incorrect currency code)....
             console.log(rateTo + " " + rateFrom);
 
