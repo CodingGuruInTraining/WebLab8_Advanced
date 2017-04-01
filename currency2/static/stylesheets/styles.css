@@ -1,7 +1,9 @@
 body {
     background: greenyellow;
+    font-family: "Gill Sans MT";
 }
 
 input, button, select {
     margin: 5px;
+    font-family: "Gill Sans MT";
 }
