@@ -29,6 +29,9 @@ function ratesRequest(callback) {
         }
         // Error...
         else {
+            console.log("Error in JSON request: " + error);
+            console.log(rates_response);
+            console.log(body);
             return callback(error);
             // todo what if no error and status is not 200?
         }
