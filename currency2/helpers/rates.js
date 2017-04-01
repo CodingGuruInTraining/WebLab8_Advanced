@@ -13,7 +13,6 @@ function ratesRequest(callback) {
     var queryParam = { 'app_id' : APIKEY };
     // Sends request to server using parameters.
     request( {uri: baseURL, qs: queryParam}, function(error, rates_response, body) {
-        // todo deal with errors
 
         // Checks that everything worked before continuing.
         if (!error && rates_response.statusCode == 200) {
@@ -27,13 +26,12 @@ function ratesRequest(callback) {
             // Only gets to this point if no errors. Returns the parsed JSON object.
             return callback(null, ratesJSON.rates);
         }
-        // Error...
+        // Errors display.
         else {
             console.log("Error in JSON request: " + error);
             console.log(rates_response);
             console.log(body);
             return callback(error);
-            // todo what if no error and status is not 200?
         }
     });
 }

@@ -1,9 +1,11 @@
 <h1>Currency Converter</h1>
-
+<!--Creates form for User input.-->
     <form action="/convert" method="GET">
         <label for="dollar">Amount of currency</label>
+        <!--Input box for values.-->
         <input type="number" step="any" name="dollar_amount" id="dollar"/>
 
+        <!--Drop-down menu for selecting original currency.-->
         <label for="from_currency">Convert from</label>
         <select name="from_currency" id="from_currency">
             <option value="USD">US Dollar</option>
@@ -16,6 +18,7 @@
 
         <br>
 
+        <!--Drop-down menu for selecting desired currency.-->
         <label for="to_currency">Convert to</label>
         <select name="to_currency" id="to_currency">
             <option value="USD">US Dollar</option>
@@ -27,5 +30,6 @@
         </select>
 
         <br>
+        <!--Submit button to perform conversion.-->
         <button type="submit">Convert</button>
     </form>
