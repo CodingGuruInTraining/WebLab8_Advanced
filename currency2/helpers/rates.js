@@ -24,8 +24,13 @@ function ratesRequest(callback) {
             } catch (error) {
                 return callback(error);   // just for catching JSON parsing errors.
             }
+
+
+            var jsonForTemplate = processRatesresponse(ratesJSON);
+
+
             // Only gets to this point if no errors. Returns the parsed JSON object.
-            return callback(null, ratesJSON.rates);
+            return callback(null, jsonForTemplate); // ratesJSON.rates);
         }
         // Error...
         else {
@@ -34,5 +39,12 @@ function ratesRequest(callback) {
         }
     });
 }
+
+
+function processRatesresponse(ratesJSON) {
+
+}
+
+
 // Returns the function created above.
 module.exports = ratesRequest;
