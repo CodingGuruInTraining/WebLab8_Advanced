@@ -11,4 +11,9 @@
   "description": "Simple currency converter, but with an API!",
   "main": "app.js",
   "author": "Not Mark"
+,
+  "engines": {
+  "node": "6.9.2",
+  "npm": "3.10.9"
+}
 }
